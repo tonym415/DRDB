@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Welcome to Grashopr's Test Server</title>
+		<script src= "js/angular.min.js"></script>
+		<script src= "js/controls.js"></script>
+	</head>
+	<body>
+		<a href="index.html">Home</a>
+		<center>
+		<h1>Success! The test virtual host is working!</h1>
+
+		<p>
+		<div ng-app="myApp" ng-controller="testCases">
+			<p>This page is going to encompass all "testing" pages for the grashopr server</p>
+		<table>
+			<tr ng-repeat="x in cases">
+				<td><a href="{{ x.name }}">{{ x.name }}</a></td>
+			</tr>
+			
+		</table>
+		</div>
+		</p>
+		
+	</body></center>
+</html>

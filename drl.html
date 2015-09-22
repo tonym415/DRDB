@@ -1,0 +1,311 @@
+<DOCTYPE html>
+<html ng-app="recipeApp" lang="en">
+    <head>
+        <title id='Description'>Recipe Entry Form</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="js/jq/jqwidgets/styles/jqx.base.css" />
+        <link rel="stylesheet" type="text/css" href="js/jq/jqwidgets/styles/jqx.ui-sunny.css" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxcore.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxdata.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxwindow.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxpanel.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxmenu.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxnumberinput.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxlistbox.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxscrollbar.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxcombobox.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxvalidator.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxnotification.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxscrollview.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxnavigationbar.js"></script>
+		<script type="text/javascript" src="js/jq/jqwidgets/jqxfileupload.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxtabs.js"></script>
+        <script type="text/javascript" src="js/jq/jqwidgets/jqxangular.js"></script>
+        <script type="text/javascript" src="js/recipeControl.js"></script>
+    </head>
+    <body ng-controller="RecipeController as recipe">
+        <a href='./index.html'>home</a>
+        <!--// This is the tab structure housing all other components-->
+        <div id='jqxTabs'>
+            <ul>
+                <li>Recipe Entry</li>
+                <li>Administration</li>
+            </ul>
+			<!-- tab 1 start  -->
+			<div id='entry'>
+				<input type='button' value='Create New Recipe' id='init_wizard' />
+				<div id='wizWindow' style='overflow: hidden; display: block;'>
+					<div id="wizHeader"> <span></span> </div>
+					<div style="overflow: hidden;" id="wizContent">
+						<div id='wizTabs'>
+							<ul id='menuitems'>
+								<li id='rInfo'>Add Recipe Info</li>
+								<li id='rImage'>Add Image</li>
+								<li id='rIngredient'>Add Ingredient</li>
+								<li id='rDirection'>Add Direction</li>
+							</ul>
+							<!-- section start -->
+							<div class='section'>
+								<form id='rInfoForm' action="./" >
+									<table width='651' height='300'>
+										<tr>
+											<td>Recipe Name</td>
+											<td><input id="recipeTitle"></input></td>
+										</tr>
+										<tr>
+											<td>Category</td>
+											<td><div id='drp_categories'></div></td>
+										</tr>
+										<tr>
+											<td>Description</td>
+											<td><textarea rows='4' cols='50' id="description"></textarea></td>
+										</tr>
+										<tr>
+											<td>Serving Size</td>
+											<td><input id="servingSize"></input></td>
+										</tr>
+										<tr>
+											<td>Source</td>
+											<td><input id="recipeSource"></input></td>
+										</tr>
+										<tr>
+											<td>Hands on Time (min)</td>
+											<td><input id="hands_on_time"></input></td>
+										</tr>
+										<tr>
+											<td>Total Time To Cook (min)</td>
+											<td><input id="ttc"></input></td>
+										</tr>
+										<tr>
+											<td colspan="2" style="text-align: center"><input type='button' id='submitRecipeInfo' value="Submit" /></td>
+										</tr>
+									</table>
+								</form>
+							</div> <!-- section end -->
+							<!-- section start -->
+							<div>
+								<div style="overflow: hidden;" id='rImageForm'>
+									<table>
+										<tr>
+											<td align="right">Choose an image for your recipe:</td>
+											<td align="left"><div id="recipe_img" /></td>
+										</tr>
+										<tr>
+											<td align="right"></td>
+											<td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" onclick='closePopup()' /></td>
+										</tr>
+									</table>
+								</div> <!-- recipe image form -->
+							</div>
+							<!-- section end -->
+							<!-- section start -->
+							<div>
+								<div style="overflow: hidden;" id='rIngredientForm'>
+									<table>
+										<tr>
+											<td align="right">Quantity:</td>
+											<td align="left"><input id="quantity" /></td>
+										</tr>
+										<tr>
+											<td align="right">Measurement:</td>
+											<td align="left"><div id="drp_measurements" ></div></td>
+										</tr>
+										<tr>
+											<td align="right">Descriptor (optional):</td>
+											<td align="left"><div id="drp_ingredient_descriptors" ></div></td>
+										</tr>
+										<tr>
+											<td align="right">Ingredient:</td>
+											<td align="left"><div id="drp_ingredients"></div></td>
+										</tr>
+										<tr>
+											<td align="right"></td>
+											<td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" onclick='closePopup()' /></td>
+										</tr>
+									</table>
+								</div> <!-- ingredient form -->
+							</div> <!-- section end -->
+							<!-- section start -->
+							<div>
+								<div style="overflow: hidden;" id='rDirectionForm'>
+									<table>
+										<tr>
+											<td align="right">Direction:</td>
+											<td><textarea rows='4' cols='50' id="direction_text"></textarea></td>
+										</tr>
+										<tr>
+											<td align="right">Image:</td>
+											<td align="left"><div id="recipe_directions_image"></div></td>
+										</tr>
+										<tr>
+											<td align="right"></td>
+											<td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" onclick='closePopup()' /></td>
+										</tr>
+									</table>
+								</div> <!-- ingredient form -->
+							</div> <!-- section end -->
+						</div> <!-- wizard tab end -->
+					</div> <!-- wizcontent end -->
+				</div> <!-- wizwindow end -->
+				<div> <!-- recipe display begin -->
+						<center><h1 id='display_recipeTitle'>{{ Recipe_Title }} </h1></center>
+						<div id='display_image'></div>
+						<p><div id='drp_categories_info' class='info'>
+							<span class='display_label'>Categories: </span>
+							<span id='display_drp_categories'></span>
+						</div></p>
+						<p><div id='description_info' class='info'>
+							<span class='display_label'>Description: </span>
+							<span id='display_description'></span>
+						</div></p>
+						<p><div id='servingSize_info' class='info'>
+							<span class='display_label'>Serving Size: </span>
+							<span id='display_servingSize'></span>
+						</div></p>
+						<p><div id='recipeSource_info' class='info'>
+							<span class='display_label'>Recipe Source: </span> 
+							<span id='display_recipeSource'></span>
+						</div></p>
+						<p><div id='hands_on_time_info' class='info'>
+							<span class='display_label'>Hands on Time (min): </span>
+							<span id='display_hands_on_time'></span>
+						</div></p>
+						<p><div id='ttc_info' class='info'>
+							<span class='display_label'>Total Time to Cook (min): </span>
+							<span id='display_ttc'></span>
+						</div></p>
+						<p><div id='display_directions'></div></p>
+				</div> <!-- recipe display end -->
+			</div> <!-- entry tab end -->
+			<!-- start tab -->
+            <div> 
+				<div id='admin'> 
+						<center><h3>This section is intended for the modification of data</h3>
+						<div id='message'></div>
+						<div id='navigationBar'>
+								<!-- Header -->
+								<div> Measurement Entry </div>
+								<!-- Content -->
+								<div>
+									<form>
+
+										<fieldset id='measurements_data'>
+												<legend>Measurements</legend>
+												<table>
+														<tr>
+																<td>Measurement Name:</td>
+																<td><jqx-input id='measurement_name'></jqx-input></td>
+														</tr>
+														<tr>
+																<td>Abbreviations (comma separated values):</td>
+																<td><jqx-input id='abbreviation'></jqx-input></td>
+														</tr>
+														<tr>
+																<td align='center'><input type='hidden'  id='measurement_id' value='measurement_id'></input></td>
+																<td align='center'><input type='hidden'  id='measurement_id' value='measurement_id'></input></td>
+														</tr>		
+														<tr>
+																<td colspan=2 align='center'><input type='button' value='Add' class='admin' /></td>
+														</tr>
+												</table>
+										</fieldset> 
+									</form>
+								</div>
+								<!-- Header -->
+								<div>Category Entry </div>
+								<!-- Content -->
+								<div> 
+									<form>
+										<fieldset id='categories_data'>
+												<legend>Categories</legend>
+												<table>
+												<tr>
+														<td>Recipe Category:</td> 
+														<td><jqx-input id='category_name'></jqx-input></td> 
+												</tr>
+												<tr>
+														<td colspan=2 align='center'><input type='hidden'  id='category_id' value='category_id'></input></td>
+												</tr>
+												<tr>
+														<td colspan=2 align='center'><input type='button' value='Add' class='admin' /></td>
+												</tr>
+												</table>
+										</fieldset>    
+									</form>
+								</div>
+								<!-- Header -->
+								<div>Ingredient Entry </div>
+								<!-- Content -->
+								<div id='sv_ingredients'>
+										<div>
+											<form>
+												<fieldset id='ingredients_data'>
+														<legend>Ingredients</legend>
+														<table>
+														<tr>
+																<td>Ingredients:</td> 
+																<td><jqx-input id='ingredient_name'></jqx-input></td> 
+														</tr>
+														<tr>
+																<td align='center' colspan='2'><input  type='hidden' id='ingredient_id' value='ingredient_id'></input></td>
+																<!--<td align='center'><div id='ingredients'></div></td>-->
+														</tr>
+														<tr>
+																<td colspan=2 align='center'><input type='button' value='Add' class='admin' /></td>
+														</tr>
+														</table>
+												</fieldset>    
+											</form>	
+										</div>	
+										<div>
+											<form>
+												<fieldset id='ingredients_data'>
+														<legend>Ingredients</legend>
+														<table>
+														<tr>
+																<td>Ingredients:</td> 
+																<td><jqx-input id='ingredient_name'></jqx-input></td> 
+														</tr>
+														<tr>
+																<td align='center' colspan='2'><input  type='hidden' id='ingredient_id' value='ingredient_id'></input></td>
+														</tr>
+														<tr>
+																<td colspan=2 align='center'><input type='button' value='Remove' class='admin' /></td>
+														</tr>
+														</table>
+												</fieldset>    
+											</form>	
+										</div>
+								</div>
+								<!-- Header -->
+								<div>Ingredient Descriptor Entry </div>
+								<!-- Content -->
+								<div>
+									<form>
+										<fieldset id='ingredient_descriptors_data'>
+												<legend>Ingredient Descriptor</legend>
+												<table>
+												<tr>
+														<td>Ingredient Descriptor:</td> 
+														<td><jqx-input id='descriptor_text'></jqx-input></td> 
+												</tr>
+												<tr>
+														<td align='center'><input  type='hidden' id='ingredient_descriptor_id' value='ingredient_descriptor_id'></input></td>
+														<td align='center'><div id='ingredient_descriptor'></div></td>
+												</tr>
+												<tr>
+														<td colspan=2 align='center'><input type='button' value='Add' class='admin' /></td>
+												</tr>
+												</table>
+										</fieldset>    
+									</form>	
+								</div>
+						</div><!-- end of navigation tab -->
+			</div><!-- end of admin tab -->
+		</div> <!-- end parent tab -->
+    </body>
+</html>

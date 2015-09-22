@@ -1,0 +1,36 @@
+table, th, td {
+	width: 100%
+	border: none;
+	border-collapse: collapse;
+	padding: 5px;
+}
+.recipeTemplate {
+ border: 2px dashed #aaa;
+ padding: 5px;
+ margin: auto;
+}
+
+.info {
+	display: none;
+}
+
+.display_label {
+	font-style: italic;
+	font-variant: small-caps;
+	font-weight: bold;	
+}
+
+.fitted {
+	border: 0px !important;
+	background-color: #ffffff !important;
+	padding: 15px !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+p {
+	display: block;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	margin-left: 1em;
+	margin-right: 1em;
+}

@@ -1,0 +1,90 @@
+<!--// Entry popups -->
+<!-- recipe display begin -->
+<center><h1 id='display_recipeTitle'>{{ Recipe_Title }} </h1></center>
+<div id='display_image'></div>
+<div id='description_info' class='info'>
+	<span class='display_label'>Description: </span>
+	<span id='display_description'></span>
+</div>
+<div id='servingSize_info' class='info'>
+	<span class='display_label'>Serving Size: </span>
+	<span id='display_servingSize'></span>
+</div>
+<div id='recipeSource_info' class='info'>
+	<span class='display_label'>Recipe Source: </span> 
+	<span id='display_recipeSource'></span>
+</div>
+<div id='hands_on_time_info' class='info'>
+	<span class='display_label'>Hands on Time (min): </span>
+	<span id='display_hands_on_time'></span>
+</div>
+<div id='ttc_info' class='info'>
+	<span class='display_label'>Total Time to Cook (min): </span>
+	<span id='display_ttc'></span>
+</div>
+<div id='display_directions'></div>
+<!-- recipe display end -->
+<!-- Recipe Info form begin -->
+    <form id='rInfoForm' action="./" >
+        <table width='651' height='300'>
+            <tr>
+                <td>Recipe Name</td>
+                <td><input id="recipeTitle" onfocus="init_rInfo()"></input></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea rows='4' cols='50' id="description"></textarea></td>
+            </tr>
+            <tr>
+                <td>Serving Size</td>
+                <td><input id="servingSize"></input></td>
+            </tr>
+            <tr>
+                <td>Source</td>
+                <td><input id="recipeSource"></input></td>
+            </tr>
+            <tr>
+                <td>Hands on Time (min)</td>
+                <td><input id="hands_on_time"></input></td>
+            </tr>
+            <tr>
+                <td>Total Time To Cook (min)</td>
+                <td><input id="ttc"></input></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center"><input type='button' onclick='setRecipeInfo()' id='submitRecipeInfo' value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!-- Recipe info form end -->    
+<!-- Ingredient entry form begin -->    
+<div style="overflow: hidden;" id='rIngredientForm'>
+		<table>
+				<tr>
+						<td align="right">Quantity:</td>
+						<td align="left"><input id="quantity" /></td>
+				</tr>
+				<tr>
+						<td align="right">Measurement:</td>
+						<td align="left"><input id="measurement" /></td>
+				</tr>
+				<tr>
+						<td align="right">Descriptor (optional):</td>
+						<td align="left"><input id="descriptor" /></td>
+				</tr>
+				<tr>
+						<td align="right">Ingredient:</td>
+						<td align="left"><div id="ingredients"></div></td>
+				</tr>
+				<tr>
+						<td align="right"></td>
+						<td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" onclick='closePopup()' /></td>
+				</tr>
+		</table>
+</div>
+<!-- Ingredient entry form end -->    
+
+<!-- Image entry form begin -->    
+<!-- Image entry form end -->    
+<!--// end of popups-->

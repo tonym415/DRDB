@@ -1,7 +1,8 @@
 import mysql.connector
 from mysql.connector import errorcode
-import sys
-config = conn.connStr() 
+import conn
+
+config = conn.connStr()
 try:
   cnx = mysql.connector.connect(**config)
 except mysql.connector.Error as err:

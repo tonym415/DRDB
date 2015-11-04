@@ -57,8 +57,8 @@ def createItem(info):
         columns = cols.rstrip(', ')
         returnCols = retcols.rstrip(', ')
         values = ', '.join(vals)
-        sql = sql + " %s) VALUES (%s) RETURNING %s;" % \
-            (columns, values, columns)
+        sql = sql + " %s) VALUES (%s);" % \
+            (columns, values)
         cursor.execute(sql)
 
         returnData['status'] = "success"
@@ -70,10 +70,6 @@ def createItem(info):
             print("Database does not exist")
         else:
             print(err)
-    # except psycopg2.DatabaseError, e:
-    #     returnData['message'] =  "%s %s" % (cursor.query, e)
-    #     sys.stderr.write("returnData: %s" % returnData)
-        # returnData['status'] = "error" finally: if con:
             con.close()
     sys.stderr.write("returnData: %s" % returnData)
     return returnData
@@ -102,17 +98,19 @@ def selectItems(info):
     try:
         returnData = {"status": 'error'}
         con = mysql.connector.connect(**config)
-        cursor = con.cursor()
+        cursor = con.cursor(buffered=True)
         sql = 'SELECT '
 
-        # dbg statement
-        #sys.stderr.write("Sql: %s" % sql)
         # get column names
         columns = ", ".join(info['cols'])
-        sql = "%s %s FROM %s;" % (sql, columns, info['entity'])
+        sql = "%s %s FROM %s" % (sql, columns, info['entity'])
+
+        # dbg statement
+        # sys.stderr.write("Sql: %s" % sql)
 
         cursor.execute(sql)
-        sys.stderr.write("Final Sql: %s" % cursor.query)
+        sys.stderr.write("Final Sql: %s" % cursor.statement)
+        sys.stderr.write("RowCount: %s" % cursor.rowcount)
         retData = []
         for row in cursor.fetchall():
             sys.stderr.write("row: %s" % row)
@@ -129,14 +127,6 @@ def selectItems(info):
             print("Database does not exist")
         else:
             print(err)
-    # except psycopg2.DatabaseError, e:
-    #     sys.stderr.write("returnData: %s" % returnData)
-    #     returnData['message'] =  "%s %s" % (returnData['message'].capitalize(), e)
-    # except:
-    #     exc_type, exc_obj, exc_tb  = sys.exc_info()
-    #     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-    #     message = "Error: %s %s File: %s Line: %s" % (exc_type, exc_obj, fname, exc_tb.tb_lineno)
-    #     data = {'status': status, 'message': message}
     finally:
         if con:
             con.close()
@@ -192,6 +182,7 @@ try:
         sys.stderr.write('data after attempted write:  %s' % data)
     # use entity classes to do functions
     else:
+        # sys.stderr.write(data['send'])
         data = doFunc(json.loads(data['send']))
 except:
    exc_type, exc_obj, exc_tb  = sys.exc_info()
